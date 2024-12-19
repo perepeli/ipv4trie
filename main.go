@@ -40,7 +40,7 @@ Logical Reasoning for Design:
 */
 
 func main() {
-	bitSet := bitset.NewIPv4BitSet() // only occupies single bit for any 2^32 ipv4 or around 4GB in worst case
+	bitSet := bitset.NewIPv4BitSet()
 
 	bitSet.Insert("192.168.0.1")
 	bitSet.Insert("192.168.0.1") // duplicate
