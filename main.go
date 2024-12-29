@@ -55,15 +55,16 @@ func main() {
 	bitSet.Insert("8.8.8.81")
 	bitSet.Insert("8.8.8.82")
 	bitSet.Insert("8.8.8.83")
-	bitSet.Insert("8.8.8.8")
+	bitSet.Insert("255.255.255.255")
 
 	// print the number of unique addresses
 	fmt.Println("Unique IP count:", bitSet.UniqueCount())
 
 	// search if ip was previously inserted
-	fmt.Println("Search for 192.168.0.1:", bitSet.Search("192.168.0.1")) // true
-	fmt.Println("Search for 8.8.8.1:", bitSet.Search("8.8.8.1"))         // false
-	fmt.Println("Search for 8.8.8.8:", bitSet.Search("8.8.8.8"))         // true
+	fmt.Println("Search for 192.168.0.1:", bitSet.Search("192.168.0.1"))         // true
+	fmt.Println("Search for 8.8.8.1:", bitSet.Search("8.8.8.1"))                 // false
+	fmt.Println("Search for 8.8.8.8:", bitSet.Search("8.8.8.8"))                 // true
+	fmt.Println("Search for 255.255.255.255:", bitSet.Search("255.255.255.255")) // true
 }
 
 func mainOld() { // initial naive approach with trie <<

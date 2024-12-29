@@ -11,7 +11,7 @@ type BitSet struct {
 }
 
 func NewIPv4BitSet() *BitSet {
-	numOfInts := (1<<32 + 31) / 2
+	numOfInts := (uint64(1<<32) + 31) / 32
 	return &BitSet{bitArray: make([]uint32, numOfInts)}
 }
 
