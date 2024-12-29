@@ -37,19 +37,19 @@ func (bitSet *BitSet) UniqueCount() uint64 {
 	return bitSet.uniqueCount
 }
 
-func ipToInt(ipAddress string) int {
+func ipToInt(ipAddress string) uint32 {
 	parts := strings.Split(ipAddress, ".")
 	if len(parts) != 4 {
 		panic("Invalid IP address format")
 	}
 
-	var result int
+	var result uint32
 	for _, part := range parts {
 		val, err := strconv.Atoi(part)
 		if err != nil || val < 0 || val > 255 {
 			panic("Invalid IP octet: " + part)
 		}
-		result = (result << 8) | val
+		result = (result << 8) | uint32(val)
 	}
 	return result
 }
