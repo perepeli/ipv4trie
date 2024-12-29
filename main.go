@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/perepeli/ipv4trie/bitset"
 	"github.com/perepeli/ipv4trie/trie"
+	"runtime"
 )
 
 /*
@@ -44,6 +45,9 @@ this solution would require 2^33 * 1 bit = 1 GB, but we waste a lot of space for
 */
 
 func main() {
+	fmt.Println("Mem stats before:")
+	printMemStats()
+
 	bitSet := bitset.NewIPv4BitSet()
 
 	bitSet.Insert("192.168.0.1")
@@ -65,6 +69,24 @@ func main() {
 	fmt.Println("Search for 8.8.8.1:", bitSet.Search("8.8.8.1"))                 // false
 	fmt.Println("Search for 8.8.8.8:", bitSet.Search("8.8.8.8"))                 // true
 	fmt.Println("Search for 255.255.255.255:", bitSet.Search("255.255.255.255")) // true
+
+	var value uint32
+	for value = 0; value <= 0xFFFFFFFF; value++ {
+		bitSet.InsertInternal(value)
+		if value%100000000 == 0 || value == 0xFFFFFFFF {
+			fmt.Printf("Current value: %032b (%d)\n", value, value)
+		}
+
+		if value == 0xFFFFFFFF {
+			fmt.Println("Loop finished.")
+			break
+		}
+	}
+
+	fmt.Println("Unique IP count:", bitSet.UniqueCount()) // 2^32 or 4294967296
+
+	fmt.Println("Mem stats after:")
+	printMemStats()
 }
 
 func mainOld() { // initial naive approach with trie <<
@@ -88,4 +110,15 @@ func mainOld() { // initial naive approach with trie <<
 	// search if ip was previously inserted (why not?)
 	fmt.Println("Search for 192.168.0.1:", trie.Search("192.168.0.1")) // true
 	fmt.Println("Search for 8.8.8.1:", trie.Search("8.8.8.1"))         // false
+}
+
+func printMemStats() {
+	var m runtime.MemStats
+	runtime.ReadMemStats(&m)
+	fmt.Printf("\tAlloc = %v MB,", bToMb(m.Alloc))
+	fmt.Printf("\tTotalAlloc = %v MB\n", bToMb(m.TotalAlloc))
+}
+
+func bToMb(b uint64) uint64 {
+	return b / 1024 / 1024
 }

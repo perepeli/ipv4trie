@@ -17,6 +17,11 @@ func NewIPv4BitSet() *BitSet {
 
 func (bitSet *BitSet) Insert(ip string) {
 	index := ipToInt(ip)
+	bitSet.InsertInternal(index)
+}
+
+func (bitSet *BitSet) InsertInternal(ip uint32) {
+	index := ip
 	arrIndex := index / 32
 	bitPosition := index % 32
 	mask := uint32(1 << bitPosition)
@@ -28,8 +33,13 @@ func (bitSet *BitSet) Insert(ip string) {
 
 func (bitSet *BitSet) Search(ip string) bool {
 	index := ipToInt(ip)
-	arrayIndex := index / 32  // Which int to use
-	bitPosition := index % 32 // Which bit in that int
+	return bitSet.SearchInternal(index)
+}
+
+func (bitSet *BitSet) SearchInternal(ip uint32) bool {
+	index := ip
+	arrayIndex := index / 32  // which int to use
+	bitPosition := index % 32 // which bit in that int
 	return (bitSet.bitArray[arrayIndex] & (1 << bitPosition)) != 0
 }
 
