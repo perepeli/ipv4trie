@@ -78,7 +78,7 @@ func main() {
 		}
 
 		if value == 0xFFFFFFFF {
-			fmt.Println("Loop finished.")
+			fmt.Println("Loop is finished, full ipv4 range (0.0.0.0 - 255.255.255.255) is inserted.")
 			break
 		}
 	}
