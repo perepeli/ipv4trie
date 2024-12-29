@@ -58,7 +58,7 @@ func main() {
 	bitSet.Insert("255.255.255.255")
 
 	// print the number of unique addresses
-	fmt.Println("Unique IP count:", bitSet.UniqueCount())
+	fmt.Println("Unique IP count:", bitSet.UniqueCount()) // 9
 
 	// search if ip was previously inserted
 	fmt.Println("Search for 192.168.0.1:", bitSet.Search("192.168.0.1"))         // true
