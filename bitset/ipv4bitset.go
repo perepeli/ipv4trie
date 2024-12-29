@@ -7,7 +7,7 @@ import (
 
 type BitSet struct {
 	bitArray    []uint32
-	uniqueCount int
+	uniqueCount uint64
 }
 
 func NewIPv4BitSet() *BitSet {
@@ -33,7 +33,7 @@ func (bitSet *BitSet) Search(ip string) bool {
 	return (bitSet.bitArray[arrayIndex] & (1 << bitPosition)) != 0
 }
 
-func (bitSet *BitSet) UniqueCount() int {
+func (bitSet *BitSet) UniqueCount() uint64 {
 	return bitSet.uniqueCount
 }
 

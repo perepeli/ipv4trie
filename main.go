@@ -17,9 +17,9 @@ Logical Reasoning for Design:
    - Total memory required for 8,589,934,592 nodes: 8,589,934,592 * 24 = 192 GB
    - This is an impractical amount of RAM, and clearly way too much.
 
-P.S, the above ^ trie solution can be optimized by storing not objects, but representing them as complete binary tree as bit array, (similar to binary heap),
-where last depth nodes would represent presence or absence of ip, and all depth above would be '0' and required to navigate to last level,
-this solution would require 2^33 * 1 bit = 1 GB, but we waste a lot of space for nodes above last level just for sake of navigation...
+P.S, the above ^ trie solution can be optimized by storing not objects, but representing them as a complete binary tree as a bit array, (similar to binary heap),
+where the last depth nodes would represent the presence or absence of an ip, and all depths above would be '0' and required to navigate to the last level,
+this solution would require 2^33 * 1 bit = 1 GB, but we waste a lot of space for nodes above the last level just for the sake of navigation...
 
 2. Next Approach - Naive Array of Bytes:
    - Instead of a complex trie, I decided to start with using a simple array where each byte represents a boolean (whether an IP has been seen).
