@@ -18,7 +18,7 @@ Logical Reasoning for Design:
    - Total memory required for 8,589,934,592 nodes: 8,589,934,592 * 24 = 192 GB
    - This is an impractical amount of RAM, and clearly way too much.
 
-P.S, the above ^ trie solution can be optimized by storing not objects, but representing them as a complete binary tree as a bit array, (similar to binary heap),
+P.S, the above ^ trie solution can be optimized by storing not objects, but representing them as a complete binary tree as a bitset array, (similar to binary heap),
 where the last depth nodes would represent the presence or absence of an ip, and all depths above would be '0' and required to navigate to the last level,
 this solution would require 2^33 * 1 bit = 1 GB, but we waste a lot of space for nodes above the last level just for the sake of navigation...
 
@@ -46,7 +46,7 @@ this solution would require 2^33 * 1 bit = 1 GB, but we waste a lot of space for
 
 func main() {
 	fmt.Println("Mem stats before:")
-	printMemStats()
+	printMemStats() // Alloc = 0 MB,   TotalAlloc = 0 MB
 
 	bitSet := bitset.NewIPv4BitSet()
 
@@ -86,7 +86,7 @@ func main() {
 	fmt.Println("Unique IP count:", bitSet.UniqueCount()) // 2^32 or 4294967296
 
 	fmt.Println("Mem stats after:")
-	printMemStats()
+	printMemStats() // Alloc = 512 MB, TotalAlloc = 512 MB
 }
 
 func mainOld() { // initial naive approach with trie <<
