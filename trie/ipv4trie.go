@@ -19,7 +19,7 @@ type TrieNode struct {
 
 type IPv4Trie struct {
 	root        *TrieNode
-	uniqueCount int
+	uniqueCount uint64
 }
 
 func NewIPv4Trie() *IPv4Trie {
@@ -55,23 +55,23 @@ func (t *IPv4Trie) Search(ipAddress string) bool {
 	return true
 }
 
-func (t *IPv4Trie) UniqueCount() int {
+func (t *IPv4Trie) UniqueCount() uint64 {
 	return t.uniqueCount
 }
 
-func ipToInt(ipAddress string) int {
+func ipToInt(ipAddress string) uint32 {
 	parts := strings.Split(ipAddress, ".")
 	if len(parts) != 4 {
 		panic("Invalid IP address format")
 	}
 
-	var result int
+	var result uint32
 	for _, part := range parts {
 		val, err := strconv.Atoi(part)
 		if err != nil || val < 0 || val > 255 {
 			panic("Invalid IP octet: " + part)
 		}
-		result = (result << 8) | val
+		result = (result << 8) | uint32(val)
 	}
 	return result
 }
